@@ -2,8 +2,28 @@
 <table>
     <tr>
       <td>
-        <input type="submit" class="g-button g-button-submit" name="signIn" id="signIn" value="Sign in">
+        <form>
+          User Name: <input type="text" name="username" /><br />
+          Password: <input type="password" name="password" />
+        </form>
+
       </td>
+    </tr>
+    <tr>
+      <td>
+        <input
+            type="submit"
+            class="g-button g-button-submit"
+            name="Log In"
+            id="LogIn"
+            value="Log In"
+        />
+      </td>
+      </tr>
+  <tr>
+    <td>
+      <%= link_to 'Sign Up', new_user_path %>
+    </td>
     </tr>
 </table>
 

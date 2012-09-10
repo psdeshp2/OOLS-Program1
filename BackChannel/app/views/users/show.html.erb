@@ -7,14 +7,17 @@
 
 <p>
   <b>Password:</b>
-  <%= @user.password %>
-</p>
-
-<p>
-  <b>Admin flag:</b>
-  <%= @user.admin_flag %>
+  <%=
+     password = ""
+     i=0
+     until i==@user.password.size
+       password << "*"
+       i += 1
+     end
+     password
+  %>
 </p>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Home Page', posts_path %>

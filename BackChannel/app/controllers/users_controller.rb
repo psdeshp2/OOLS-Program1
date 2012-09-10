@@ -42,6 +42,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
 
+    #Adding default value for admin flag as 0 since by default the user is not an admin
+    @user.admin_flag=0
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

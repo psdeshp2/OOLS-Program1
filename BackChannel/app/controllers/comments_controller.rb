@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
+    #@comments = Comment.find_by_post_id(1)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @comments }
