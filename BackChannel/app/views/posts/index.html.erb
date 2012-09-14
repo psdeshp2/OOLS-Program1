@@ -11,6 +11,16 @@
 <% @posts.each do |post| %>
   <tr>
     <td><%= post.content %></td>
+    <td>Number of Comments:
+      <%= no_of_comments = Comment.count_by_sql("select count(*) from comments where post_id='" +post.id.to_s + "'")
+          no_of_comments.to_s
+      %>
+    </td>
+    <td>Number of Votes:
+      <%= no_of_votes = Vote.count_by_sql("select count(*) from votes where post_id='" +post.id.to_s + "'")
+          no_of_votes.to_s
+      %>
+    </td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>

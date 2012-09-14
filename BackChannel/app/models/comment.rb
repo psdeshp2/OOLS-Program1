@@ -12,4 +12,10 @@ class Comment < ActiveRecord::Base
   validates :content, :presence => true
   validates :post, :presence => true
   validates :user, :presence => true
+
+  def check_if_it_comes_here
+      puts "Yes!!! It is here"
+  end
+
+
 end

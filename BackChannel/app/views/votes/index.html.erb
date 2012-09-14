@@ -7,7 +7,8 @@
     <th></th>
   </tr>
 
-<% @votes.each do |vote| %>
+<% puts "Here"
+   @votes.each do |vote| %>
   <tr>
     <td><%= link_to 'Show', vote %></td>
     <td><%= link_to 'Edit', edit_vote_path(vote) %></td>

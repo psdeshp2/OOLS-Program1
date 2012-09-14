@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.all
 
-    #@comments = Comment.find_by_post_id(1)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @comments }
@@ -82,5 +81,9 @@ class CommentsController < ApplicationController
       format.html { redirect_to comments_url }
       format.json { head :no_content }
     end
+  end
+
+  def count_by_post(post_id)
+    Comment.c
   end
 end

@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+
   # GET /votes
   # GET /votes.json
   def index
@@ -41,6 +42,8 @@ class VotesController < ApplicationController
   # POST /votes.json
   def create
     @vote = Vote.new(params[:vote])
+    @vote.post_id = 1
+    @vote.user_id = 1
 
     respond_to do |format|
       if @vote.save

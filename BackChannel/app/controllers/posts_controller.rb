@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+
+  helper CommentsHelper
+
   # GET /posts
   # GET /posts.json
   def index
