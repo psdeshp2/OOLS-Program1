@@ -10,14 +10,20 @@
   <%= Comment.find_all_by_post_id(@post.id) %>
 </p>
 
-<p>
-  No of votes :
-  <%= Vote.count_by_sql "select count(*) from votes where post_id='" +@post.id.to_s + "'" %>
-</p>
+<td>Number of Votes:
+  <%= no_of_votes = Vote.count_by_sql("select count(*) from votes where post_id='" +@post.id.to_s + "'")
+      no_of_votes.to_s
+  %>
+</td>
 
-<p>
-  <%= render 'votes/form' %>
-</p>
+<br>
+
+<!-- Vote for the post -->
+<%= link_to 'Vote', :controller => "votes", :action => "new", :post_id => @post.id %>
+
+<!-- Comment on the post -->
+<%= link_to 'Comment', :controller => "comments", :action => "new", :post_id => @post.id %>
+
 
 <%= link_to 'Edit', edit_post_path(@post) %>
 <%= link_to 'Back', posts_path %>

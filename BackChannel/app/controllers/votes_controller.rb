@@ -25,12 +25,15 @@ class VotesController < ApplicationController
   # GET /votes/new
   # GET /votes/new.json
   def new
-    @vote = Vote.new
+    #@vote = Vote.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @vote }
-    end
+    create
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #  format.json { render json: @vote }
+    #end
+
+
   end
 
   # GET /votes/1/edit
@@ -42,7 +45,25 @@ class VotesController < ApplicationController
   # POST /votes.json
   def create
     @vote = Vote.new(params[:vote])
-    @vote.post_id = 1
+    @vote.post_id = (params[:post_id])
+      @vote.user_id = 1
+
+    respond_to do |format|
+      if @vote.save
+        format.html { redirect_to "/posts/" + @vote.post_id.to_s }
+        format.json { render json: @vote, status: :created, location: @vote }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @vote.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /votes
+  # POST /votes.json
+  def create_vote_for_post (post_id)
+    @vote = Vote.new(params[:vote])
+    @vote.post_id = post_id
     @vote.user_id = 1
 
     respond_to do |format|

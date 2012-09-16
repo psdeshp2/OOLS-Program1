@@ -1,15 +1,23 @@
 BackChannel::Application.routes.draw do
+  resources :user_sessions
+
   resources :votes
 
   resources :comments
 
+  match "posts/:id" => "posts#show", :as => :posts
   resources :posts
 
   resources :users
 
+  resources :user_sessions
+
   get "home/index"
 
   resources :categories
+
+  match 'login' => "user_sessions#new",      :as => :login
+  match 'logout' => "user_sessions#destroy", :as => :logout
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

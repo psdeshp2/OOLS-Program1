@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  attr_accessible :admin_flag, :password, :username
+  acts_as_authentic
+  attr_accessible :admin_flag, :password, :crypted_password, :password_salt, :persistence_token,:password_confirmation,:username, :email
 
   has_many :posts
   has_many :comments
-  has_many :votes
 
   validates :username, :presence => true
   validates :password, :presence => true
