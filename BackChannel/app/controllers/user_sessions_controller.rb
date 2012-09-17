@@ -1,4 +1,7 @@
 class UserSessionsController < ApplicationController
+  before_filter :require_no_user, :only => [:new, :create]
+  before_filter :require_user, :only => :destroy
+
   def new
     @user_session = UserSession.new
   end
@@ -8,7 +11,7 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-        format.html { redirect_to "/posts", notice: 'Session was successfully created.' }
+        format.html { redirect_to "/posts", notice: 'You have successfully logged in.' }
         format.json { render json: @user_session, status: :created, location: @user_session }
       else
         format.html { render action: "new" }

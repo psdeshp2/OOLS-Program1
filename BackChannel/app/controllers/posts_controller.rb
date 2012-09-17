@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
+  before_filter :require_user
 
   helper CommentsHelper
+
 
   # GET /posts
   # GET /posts.json
@@ -28,7 +30,6 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
@@ -48,7 +49,7 @@ class PostsController < ApplicationController
 
     @post = Post.new(params[:post])
 
-    @post.user_id = 1
+    @post.user_id =  current_user().id;
 
 
     respond_to do |format|

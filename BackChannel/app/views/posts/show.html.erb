@@ -1,29 +1,95 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
+<div style="text-align: center;">
+  <table>
+    <tr>
+     <td>
+       <b><%= @post.content %> &nbsp;&nbsp;<i>by <%= @post.user_id %> &nbsp;&nbsp;&nbsp;</i> </b>   <!-- Vote for the post -->
+     </td>
+     <td>
+        <%=
+            voters = Vote.find_by_sql("select user_id, username from votes join users where votes.user_id = users.id and votes.post_id= " + @post.id.to_s)
 
-<p>
-  Comments :
-  <%= Comment.find_all_by_post_id(@post.id) %>
-</p>
+            has_current_user_voted = false
+            voters.each do |voter|
+              if voter[:user_id] == return_current_user
+                puts voter[:user_id]
+                has_current_user_voted = true
+              end
+            end
 
-<td>Number of Votes:
-  <%= no_of_votes = Vote.count_by_sql("select count(*) from votes where post_id='" +@post.id.to_s + "'")
-      no_of_votes.to_s
-  %>
-</td>
+            return_string = ""
+            if has_current_user_voted == false
+              return_string = voters.size.to_s + " users have voted for this post"
+            elsif
+            return_string = "You and " + (voters.size - 1).to_s + " users have voted for this post"
+            end
+            return_string
+        %>
+      </td>
+      <td>
+        &nbsp;&nbsp;&nbsp;
+        <%= link_to 'Vote', :controller => "votes", :action => "new", :post_id => @post.id %>
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
+<div>
+    <div style="border: 1px">
+    <table>
+      <tr>
+        <td>
+          <% @post.comments.each do |comment| %>
+              <div style="margin-left: 30px;"><%= comment.content %> <i>by <%= comment.user_id %></i>
+                <br><br></div>
+          <% end %>
+        </td>
+        <td>
+        <td>
+          <!--%=
+              voters = Vote.find_by_sql("select user_id, username from votes join users where votes.user_id = users.id and votes.comment_id= " + @post.id.to_s)
 
+              has_current_user_voted = false
+              voters.each do |voter|
+                if voter[:user_id] == return_current_user
+                  puts voter[:user_id]
+                  has_current_user_voted = true
+                end
+              end
+
+              return_string = ""
+              if has_current_user_voted == false
+                return_string = voters.size.to_s + " users have voted for this post"
+              elsif
+              return_string = "You and " + (voters.size - 1).to_s + " users have voted for this post"
+              end
+              return_string
+          % -->
+        </td>
+        </td>
+      </tr>
+      <tr>
+      <%= form_for([@post, @post.comments.build]) do |f| %>
+              <td>
+                <div style="margin-left: 25px;" class="field">
+                  <%= f.text_field :content %>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <%= f.submit %>
+                </div>
+              </td>
+            </tr>
+              </table>
+      <% end %>
+    </div>
+</div>
 <br>
 
-<!-- Vote for the post -->
-<%= link_to 'Vote', :controller => "votes", :action => "new", :post_id => @post.id %>
+<div>
+  <%= link_to 'Edit', edit_post_path(@post) %>
+  <%= link_to 'Back', posts_path %>
+</div>
 
-<!-- Comment on the post -->
-<%= link_to 'Comment', :controller => "comments", :action => "new", :post_id => @post.id %>
-
-
-<%= link_to 'Edit', edit_post_path(@post) %>
-<%= link_to 'Back', posts_path %>

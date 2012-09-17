@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
+  before_filter :require_user
   def index
     @comments = Comment.all
 

@@ -3,10 +3,13 @@ BackChannel::Application.routes.draw do
 
   resources :votes
 
-  resources :comments
+  #match "posts/:id" => "posts#show", :as => :posts
 
-  match "posts/:id" => "posts#show", :as => :posts
-  resources :posts
+  resources :posts do
+    resources :comments do
+      resources :votes
+    end
+  end
 
   resources :users
 
