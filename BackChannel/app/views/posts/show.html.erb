@@ -11,8 +11,24 @@
 </p>
 
 <td>Number of Votes:
-  <%= no_of_votes = Vote.count_by_sql("select count(*) from votes where post_id='" +@post.id.to_s + "'")
-      no_of_votes.to_s
+  <%=
+      voters = Vote.find_by_sql("select user_id, username from votes join users where votes.user_id = users.id and votes.post_id= " + @post.id.to_s)
+
+      has_current_user_voted = false
+      voters.each do |voter|
+        if voter[:user_id] == return_current_user
+          puts voter[:user_id]
+           has_current_user_voted = true
+        end
+      end
+
+      return_string = ""
+      if has_current_user_voted == false
+        return_string = voters.size.to_s + " users have voted for this post"
+      elsif
+      return_string = "You and " + (voters.size - 1).to_s + " users have voted for this post"
+      end
+      return_string
   %>
 </td>
 
