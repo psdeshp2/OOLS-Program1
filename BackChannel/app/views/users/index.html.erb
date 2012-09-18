@@ -1,12 +1,12 @@
 <h1>Listing users</h1>
 
-<table width = "400">
+<table width = "500">
   <tr>
     <th style="text-align: left;">Username</th>
     <th style="text-align: left;">Password</th>
     <th></th>
     <th></th>
-    <th></th>
+    <th style="text-align: left;">Admin Role</th>
   </tr>
   <tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr>
 <% @users.each do |user| %>
@@ -14,8 +14,12 @@
     <td><%= user.username %></td>
     <td><%= user.email %> </td>
     <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if user.admin_flag == 0 %>
+        <td><%= link_to 'Enable', update_user_path(:id => user.id,:perform =>"enable") %></td>
+    <% else %>
+        <td><%= link_to 'Disable', update_user_path(:id => user.id,:perform =>"disable") %></td>
+    <% end %>
   </tr>
       <tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr>
 <% end %>
