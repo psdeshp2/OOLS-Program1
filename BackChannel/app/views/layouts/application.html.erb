@@ -10,6 +10,9 @@
 
 <div style="text-align: right;">
   <% if current_user %>
+      <% if admin_user? %>
+          <%= link_to "Admin Tools", admin_path %> |
+       <% end %>
       <%= link_to "Edit Profile", edit_user_path(current_user.id) %> |
       <%= link_to "Logout", logout_path %>
   <% else %>

@@ -13,13 +13,8 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-     #   if admin_user?
           format.html { redirect_to "/posts", notice: 'You have successfully logged in.' }
           format.json { render json: @user_session, status: :created, location: @user_session }
-     #   else
-     #     format.html { redirect_to admin_path, notice: 'You have successfully logged in as admin' }
-     #     format.json { render json: @user_session, status: :created, location: @user_session }
-     #   end
       else
         format.html { render action: "new" }
         format.json { render json: @user_session.errors, status: :unprocessable_entity }
