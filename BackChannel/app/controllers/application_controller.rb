@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user,:require_user,:require_no_user,:admin_user?
+  helper :all
+  helper_method :current_user,:require_user,:require_no_user,:admin_user?,:require_admin
 
-  private
+  public
 
   def require_user
     unless current_user
@@ -37,6 +38,14 @@ class ApplicationController < ActionController::Base
       else
         return false
       end
+    end
+  end
+
+  def require_admin
+    unless admin_user?
+      flash[:notice] = "You must be an admin to view this page"
+      redirect_to root_url
+      return false
     end
   end
 end

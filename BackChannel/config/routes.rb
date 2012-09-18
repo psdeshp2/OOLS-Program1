@@ -22,6 +22,8 @@ BackChannel::Application.routes.draw do
   match 'search' => "search#search" , :as =>:search
   match 'new_search' => "search#new" ,:as => :new_search
 
+  match 'admin' => "admin#index", :as => :admin
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
