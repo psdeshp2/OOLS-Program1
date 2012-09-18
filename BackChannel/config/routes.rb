@@ -6,9 +6,7 @@ BackChannel::Application.routes.draw do
   #match "posts/:id" => "posts#show", :as => :posts
 
   resources :posts do
-    resources :comments do
-      resources :votes
-    end
+    resources :comments
   end
 
   resources :users

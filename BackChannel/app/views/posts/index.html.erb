@@ -11,7 +11,7 @@
       <h3>Posts from everyone</h3> <br>
 
 <% @posts.each do |post| %>
-      <div style="font-size: 30px;"><%= post.content %></div>  <br>
+      <div style="font-size: 30px;"><%= post.content %>&nbsp;&nbsp;<i>by <%= post.user_id %></div>  <br>
       <table>
         <tr>
           <td><%= no_of_comments = Comment.count_by_sql("select count(*) from comments where post_id='" +post.id.to_s + "'")

@@ -40,33 +40,39 @@
     <table>
       <tr>
         <td>
+          <table>
           <% @post.comments.each do |comment| %>
-              <div style="margin-left: 30px;"><%= comment.content %> <i>by <%= comment.user_id %></i>
-                <br><br></div>
+                <tr>
+                  <td>
+                    <div style="margin-left: 30px; margin-bottom: 15px;"><%= comment.content %> <i>by <%= comment.user_id %></i> </div>
+                  </td>
+                  <td>
+                    <!--%=
+                    voters = Vote.find_by_sql("select user_id, username from votes join users where votes.user_id = users.id and votes.comment_id= " + @post.id.to_s)
+
+                    has_current_user_voted = false
+                    voters.each do |voter|
+                    if voter[:user_id] == return_current_user
+                        puts voter[:user_id]
+                     has_current_user_voted = true
+                    end
+                   end
+
+                    return_string = ""
+                    if has_current_user_voted == false
+                   return_string = voters.size.to_s + " users have voted for this post"
+                     elsif
+                  return_string = "You and " + (voters.size - 1).to_s + " users have voted for this post"
+                     end
+                  return_string
+                           % -->
+                  </td>
+                  <td>
+                    <div style="margin-bottom: 15px;"><%= link_to 'Vote', :controller => "votes", :action => "new", :comment_id => comment.id %></div>
+                  </td>
+                </tr>
           <% end %>
-        </td>
-        <td>
-        <td>
-          <!--%=
-              voters = Vote.find_by_sql("select user_id, username from votes join users where votes.user_id = users.id and votes.comment_id= " + @post.id.to_s)
-
-              has_current_user_voted = false
-              voters.each do |voter|
-                if voter[:user_id] == return_current_user
-                  puts voter[:user_id]
-                  has_current_user_voted = true
-                end
-              end
-
-              return_string = ""
-              if has_current_user_voted == false
-                return_string = voters.size.to_s + " users have voted for this post"
-              elsif
-              return_string = "You and " + (voters.size - 1).to_s + " users have voted for this post"
-              end
-              return_string
-          % -->
-        </td>
+          </table>
         </td>
       </tr>
       <tr>
