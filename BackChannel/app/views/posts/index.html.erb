@@ -13,24 +13,47 @@
   <% @posts.each do |post| %>
       <div style="font-size: 30px;"><%= post.content %>&nbsp;&nbsp;<i>by <%= post.user.username %></div>  <br>
       <table>
+        <% if admin_user? %>
+            <% post.comments.reverse.each do |comment| %>
+                <tr>
+                  <td>
+                    <div style="margin-left: 30px; margin-bottom: 15px;"><%= comment.content %> <i>by <%= comment.user.username %></i> </div>
+                  </td>
+                  &nbsp;&nbsp;
+                  <td>
+                    <div style="margin-left: 30px; margin-bottom: 15px;">
+                      <%= link_to 'Delete Comment',[comment.post, comment],:confirm => 'Are you sure?',:method => :delete %>
+                    </div>
+                  </td>
+                </tr>
+                <% end %>
+        <% end %>
+        <% unless admin_user? %>
         <tr>
-          <td><%= no_of_comments = Comment.count_by_sql("select count(*) from comments where post_id='" +post.id.to_s + "'")
-                  no_of_comments.to_s %> comments
-          </td>
-          <td>
-            <%= no_of_votes = Vote.count_by_sql("select count(*) from votes where post_id='" +post.id.to_s + "'")
-                no_of_votes.to_s %> votes
-          </td>
+              <td><%= no_of_comments = Comment.count_by_sql("select count(*) from comments where post_id='" +post.id.to_s + "'")
+                      no_of_comments.to_s %> comments
+              </td>
+              <td>
+                <%= no_of_votes = Vote.count_by_sql("select count(*) from votes where post_id='" +post.id.to_s + "'")
+                    no_of_votes.to_s %> votes
+              </td>
         </tr>
+        <% end %>
         <tr>
-          <td><%= link_to 'Show', post %></td>
-          <td><%= link_to 'Edit', edit_post_path(post) %></td>
-          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% unless admin_user? %>
+              <td><%= link_to 'Show', post %></td>
+              <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <% end %>
+          <td><%= link_to 'Delete Post', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       </table>
       <br>
     <% end %>
+  <% unless admin_user? %>
     <%= link_to 'New Post', new_post_path %>
+    <% else %>
+    <%= link_to 'Back to Admin Tools', admin_path %>
+  <% end %>
   </div>
 </div>
 

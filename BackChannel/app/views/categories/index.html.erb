@@ -1,13 +1,12 @@
 <h1>Listing categories</h1>
-
-<table>
+<table width="400">
   <tr>
-    <th>Name</th>
+    <th style="text-align: left;">Name</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
+  <tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr>
 <% @categories.each do |category| %>
   <tr>
     <td><%= category.name %></td>
@@ -15,9 +14,11 @@
     <td><%= link_to 'Edit', edit_category_path(category) %></td>
     <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
+      <tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr>
 <% end %>
 </table>
 
 <br />
 
 <%= link_to 'New Category', new_category_path %>
+<%= link_to 'Back to Admin Tools', admin_path %>
