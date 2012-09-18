@@ -1,0 +1,9 @@
+
+<div style="text-align: center; margin-top: 200px;">
+  <h1>Your search result:</h1>
+  <br><br>
+  <% @post_search.each do |post| %>
+      <div style="font-size: 15px;"><%= post.content %>&nbsp;&nbsp;<i>by <%= post.user.username %></div><br><br>
+  <% end %>
+  <%= link_to 'Start a new search', new_search_path %>
+</div>

@@ -4,7 +4,7 @@
   <table>
     <tr>
      <td>
-       <b><%= @post.content %> &nbsp;&nbsp;<i>by <%= @post.user_id %> &nbsp;&nbsp;&nbsp;</i> </b>   <!-- Vote for the post -->
+       <b><%= @post.content %> &nbsp;&nbsp;<i>by <%= @post.user.username %> &nbsp;&nbsp;&nbsp;</i> </b>   <!-- Vote for the post -->
      </td>
      <td>
         <%=
@@ -41,10 +41,10 @@
       <tr>
         <td>
           <table>
-          <% @post.comments.each do |comment| %>
+          <% @post.comments.reverse.each do |comment| %>
                 <tr>
                   <td>
-                    <div style="margin-left: 30px; margin-bottom: 15px;"><%= comment.content %> <i>by <%= comment.user_id %></i> </div>
+                    <div style="margin-left: 30px; margin-bottom: 15px;"><%= comment.content %> <i>by <%= comment.user.username %></i> </div>
                   </td>
                   <td>
                     <!--%=
@@ -88,7 +88,7 @@
                 </div>
               </td>
             </tr>
-              </table>
+      </table>
       <% end %>
     </div>
 </div>

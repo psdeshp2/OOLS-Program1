@@ -1,0 +1,10 @@
+<div style="text-align: center; margin-top: 200px;">
+  <h1>Search by content or user or category</h1>
+  <div style="text-align: center; margin-top: 50px;">
+    <%= form_tag search_path do |f| %>
+        <%= text_field_tag 'q', params[:q], {:size => 40} %>
+        <%= submit_tag 'Search' %>
+    <% end %>
+  </div>
+</div>
+

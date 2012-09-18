@@ -19,6 +19,8 @@ BackChannel::Application.routes.draw do
 
   match 'login' => "user_sessions#new",      :as => :login
   match 'logout' => "user_sessions#destroy", :as => :logout
+  match 'search' => "search#search" , :as =>:search
+  match 'new_search' => "search#new" ,:as => :new_search
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

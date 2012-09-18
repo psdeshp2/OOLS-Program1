@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   before_filter :require_user
   def index
-    @comments = Comment.all
+    @comments = Comment.all(:order => "updated_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(params[:id], :order => "updated_at DESC")
 
     respond_to do |format|
       format.html # show.html.erb
