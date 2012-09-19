@@ -29,7 +29,7 @@ BackChannel::Application.routes.draw do
   match 'edit_comment' => "comments#edit", :as => :edit_comment
   match 'show_others_comments' => "others#comments", :as => :show_others
   match 'show_others_posts' => "others#posts", :as => :show_others
-
+  match 'reports' => "reports#index" , :as => :reports
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
