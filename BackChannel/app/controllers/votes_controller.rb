@@ -1,6 +1,7 @@
 class VotesController < ApplicationController
 
   before_filter :require_user
+  before_filter :require_admin ,:only => [:index,:show,:destroy]
   # GET /votes
   # GET /votes.json
   def index
@@ -46,13 +47,22 @@ class VotesController < ApplicationController
   # POST /votes.json
   def create
     @vote = Vote.new(params[:vote])
-    @vote.comment_id = params[:comment_id]
+    if params[:comment_id]
+      @vote.comment_id = params[:comment_id]
+      @comment = Comment.find(params[:comment_id])
+      @post = @comment.post
+    else
+      @vote.post_id = params[:post_id]
+      @post = Post.find(params[:post_id])
+    end
+
+
     @vote.user_id = current_user.id
 
     respond_to do |format|
       if @vote.save
-        format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
-        format.json { render json: @vote, status: :created, location: @vote }
+        format.html { redirect_to @post, notice: 'Vote was successfully created.' }
+        format.json { render json: @post, status: :created, location: @vote }
       else
         format.html { render action: "new" }
         format.json { render json: @vote.errors, status: :unprocessable_entity }

@@ -1,6 +1,20 @@
 <div class="notice"><%= notice %></div>
 <table>
+  <br><br><br><br><br><br>
  <h1 style="text-align: center;">Hi Welcome to BackChannel... !!! </h1>
+  <br><br><br>
+  <div style="text-align: center; margin-left: 300px; margin-right: 300px;">
+    <i>
+          In this application you can create posts, comment on the posts and
+          vote for the posts/comments. You can see who all have commented or posted.<br><br><br>
+          Please login to explore or create a new account if you dont have one.
+    </i>
+  </div>
+  <div style="text-align:center;">
+    <% if current_user %>
+        <%= link_to 'Take me to all posts', posts_path %>
+    <% end %>
+  </div>
 </table>
 
 

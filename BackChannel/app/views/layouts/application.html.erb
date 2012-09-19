@@ -8,7 +8,7 @@
 </head>
 <body style="background-color: #f5f5dc;">
 
-<div style="text-align: right;">
+<div style="text-align: right; font-size: 15px;">
   <% if current_user %>
       <i>Welcome, <%= current_user.username %></i>
       <% if admin_user? %>
@@ -18,7 +18,7 @@
       <%= link_to "Logout", logout_path %>
   <% else %>
       <%= link_to "Register", new_user_path %> |
-      <%= link_to "Login", login_path %>
+      <%= link_to "Login", login_path %> |
   <% end %>
   <%= link_to 'Search', new_search_path %>
 </div>

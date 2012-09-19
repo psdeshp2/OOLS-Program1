@@ -27,7 +27,8 @@ BackChannel::Application.routes.draw do
   match 'admin' => "admin#index", :as => :admin
   match 'update_user' => "users#update", :as => :update_user
   match 'edit_comment' => "comments#edit", :as => :edit_comment
-  match 'show_others' => "others#index", :as => :show_others
+  match 'show_others_comments' => "others#comments", :as => :show_others
+  match 'show_others_posts' => "others#posts", :as => :show_others
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -20,14 +20,20 @@
 
             return_string = ""
             if has_current_user_voted_post == false
-              return_string = voters_post.size.to_s + " users have voted for this post"
-            elsif
+            return_string = voters_post.size.to_s + " users have voted for this post"
+            elsif voters_post.size == 1
+            return_string = "You have voted for this post"
+            else
             return_string = "You and " + (voters_post.size - 1).to_s + " users have voted for this post"
             end
             return_string
         %>
       </td>
       <td>
+        &nbsp;&nbsp;&nbsp;
+        <% unless voters_post.size==0 || (voters_post.size ==1 && has_current_user_voted_post) %>
+        <%= link_to 'See here', :controller=>"others" ,:action=>"posts",:post=>@post %>
+            <% end %>
         &nbsp;&nbsp;&nbsp;
         <% unless current_user.id == @post.user_id || has_current_user_voted_post %>
             <%= link_to 'Vote', :controller => "votes", :action => "new", :post_id => @post.id %>
@@ -64,17 +70,23 @@
 
                     return_string = ""
                     if has_current_user_voted_comment == false
-                   return_string = voters_comment.size.to_s + " users have voted for this post"
-                     elsif
-                  return_string = "You and " + (voters_comment.size - 1).to_s + " users have voted for this post"
-                     end
+                    return_string = voters_comment.size.to_s + " users have voted for this comment"
+                    elsif voters_comment.size == 1
+                    return_string = "You have voted for this comment"
+                    else
+                    return_string = "You and " + (voters_comment.size - 1).to_s + " users have voted for this comment"
+                    end
                   return_string
                            %>
-                      <%= link_to 'See here', show_others_path(:user_list =>voters_comment) %>
+                      &nbsp;&nbsp;&nbsp;
+                      <% unless voters_comment.size==0 || (voters_comment.size ==1 && has_current_user_voted_comment) %>
+                      <%= link_to 'See here', :controller=>"others" ,:action=>"comments",:comment_id=>comment.id %>
+                      <% end %>
                     </div>
                   </td>
                   <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td>
+                    &nbsp;&nbsp;&nbsp;
                     <% unless current_user.id == comment.user_id || has_current_user_voted_comment %>
                         <div style="margin-bottom: 15px;"><%= link_to 'Vote', :controller => "votes", :action => "new", :comment_id => comment.id %></div>
                     <% end %>
