@@ -36,6 +36,10 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    respond_to do |format|
+      format.html # edit.html.erb
+      format.json { render json: @comment }
+    end
   end
 
   # POST /comments

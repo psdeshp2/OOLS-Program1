@@ -80,7 +80,7 @@
                       <div style = "margin-left: 30px;">
                         <table>
                           <tr>
-                            <td><%= link_to 'Edit Comment', edit_post_comment_path(comment) %></td>
+                            <td><%= link_to 'Edit Comment', edit_comment_path(:id => comment.id,:post_id =>@post.id)  %></td>
                             <td>&nbsp;&nbsp;</td>
                             <td><%= link_to 'Delete Comment', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
                           </tr>
