@@ -41,13 +41,12 @@
         <% end %>
         <tr>&nbsp;</tr> <tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr>
         <tr>
-          <% unless admin_user? %>
+
               <td><%= link_to 'Show Post', post %></td>
               <% unless current_user.id != post.user_id %>
                 <td><%= link_to 'Edit Post', edit_post_path(post) %></td>
               <% end %>
               <td>&nbsp;&nbsp;</td>
-          <% end %>
           <% if current_user.id == post.user_id || admin_user?%>
               <td><%= link_to 'Delete Post', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
