@@ -10,6 +10,7 @@
 
 <div style="text-align: right;">
   <% if current_user %>
+      <i>Welcome, <%= current_user.username %></i>
       <% if admin_user? %>
           <%= link_to "Admin Tools", admin_path %> |
        <% end %>
