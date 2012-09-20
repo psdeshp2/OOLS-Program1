@@ -2,22 +2,23 @@
 
 <div class="notice" style="color:#8b0000;margin-left:20px;"><%= notice %></div>
 <div style="width:100%;">
-  <h1 style="text-align: center">Welcome to Backchannel application.</h1>
-  <br><br><br>
-<div style="float:left; width:20%;">
+<div style="float:left; width:5%;">
       <!-- Set Div As your requirement -->
 </div>
-<div style="float:right; width:80%; margin-left:10px; border-left: 2px solid #008b8b; padding: 10px;">
+<div style="float:right; width:95%; border-left: 2px #008b8b; padding: 10px;">
       <h3>Posts from everyone: </h3><br>
 
   <% @posts.each do |post| %>
-      <div style="font-size: 30px;"><%= post.content %>&nbsp;&nbsp;<i>by <%= post.user.username %></div>  <br>
       <table>
+        <td>
+          <div style="font-size: 18px;"><%= post.content %>&nbsp;&nbsp;<i>by <%= post.user.username %></div>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
         <% if admin_user? %>
             <% post.comments.each do |comment| %>
                 <tr>
                   <td>
-                    <div style="margin-left: 30px; margin-bottom: 15px;"><%= comment.content %> <i>by <%= comment.user.username %></i> </div>
+                    <div style="margin-bottom: 15px;"><%= comment.content %> <div style="font-size: 8px;"><i>by <%= comment.user.username %></i></div> </div>
                   </td>
                   &nbsp;&nbsp;
                   <td>
@@ -29,7 +30,6 @@
                 <% end %>
         <% end %>
         <% unless admin_user? %>
-        <tr>
               <td><%= no_of_comments = Comment.count_by_sql("select count(*) from comments where post_id='" +post.id.to_s + "'")
                       no_of_comments.to_s %> comments,
               </td>
@@ -37,11 +37,9 @@
                 <%= no_of_votes = Vote.count_by_sql("select count(*) from votes where post_id='" +post.id.to_s + "'")
                     no_of_votes.to_s %> votes
               </td>
-        </tr>
         <% end %>
-        <tr>&nbsp;</tr> <tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr><tr>&nbsp;</tr>
+        <tr>&nbsp;</tr> <tr>&nbsp;</tr><tr>&nbsp;</tr>
         <tr>
-
               <td><%= link_to 'Show Post', post %></td>
               <% unless current_user.id != post.user_id %>
                 <td><%= link_to 'Edit Post', edit_post_path(post) %></td>
@@ -54,9 +52,7 @@
       </table>
       <br>
     <% end %>
-  <% unless admin_user? %>
-    <%= link_to 'New Post', new_post_path %>
-    <% else %>
+  <% if admin_user? %>
     <%= link_to 'Back to Admin Tools', admin_path %>
   <% end %>
   </div>
