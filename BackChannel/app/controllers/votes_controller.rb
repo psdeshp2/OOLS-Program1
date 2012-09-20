@@ -61,6 +61,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if @vote.save
+        @post.touch
         format.html { redirect_to @post, notice: 'Vote was successfully created.' }
         format.json { render json: @post, status: :created, location: @vote }
       else

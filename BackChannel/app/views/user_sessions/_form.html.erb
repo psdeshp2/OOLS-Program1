@@ -10,19 +10,27 @@
       </ul>
     </div>
   <% end %>
+    <br><br><br>
 
-  <div class="actions" style="text-align: center;">
-    <p style="text-align: center; margin-top: 10px; font-size: 20px;">TAKE ME IN !</p>
-    <p>
-      <%= f.label :username %> <br/>
-      <%= f.text_field :username %>
-    </p>
-    <p>
-      <%= f.label :password %> <br/>
-      <%= f.password_field :password %>
-    </p>
-    <%= f.submit "Submit" %>
-
-  </div>
+<h1 style="text-align: center;">TAKE ME IN !</h1>
+<table align="center">
+    <tr class="field">
+        <td>
+            <%= f.label :username %><br />
+            <%= f.text_field :username %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td>
+            <%= f.label :password %><br />
+            <%= f.password_field :password %>
+        </td>
+    </tr>
+    <tr class="field" align="center">
+        <td>
+            <br>
+            <%= f.submit "Log In" %>
+        </td>
+    </tr>
 <% end %>
-
+</table>

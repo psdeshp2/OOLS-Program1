@@ -1,38 +1,50 @@
 <div style="margin-left: 680px;">
-  <%= form_for(@user) do |f| %>
-      <% if @user.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                <ul>
+                    <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+</div>
 
-            <ul>
-              <% @user.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
-  </div>
-      <div style="margin-top: 200px;margin-left: 680px;">
-      <h1>New user</h1>
-    <div class="field">
-      <%= f.label :username %><br />
-      <%= f.text_field :username %>
-    </div>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
-    </div>
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password %>
-    </div>
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+<br><br><br>
+<h1 style="text-align: center;">New user</h1>
+<table align="center">
 
+    <tr class="field">
+        <td>
+            <%= f.label :username %><br />
+            <%= f.text_field :username %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td>
+            <%= f.label :email %><br />
+            <%= f.text_field :email %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td>
+            <%= f.label :password %><br />
+            <%= f.password_field :password %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td>
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation %>
+        </td>
+    </tr>
+    <tr class="field" align="center">
+        <td>
+            <br>
+            <%= f.submit %>
+        </td>
+    </tr>
 <% end %>
-  </div>
+</table>
