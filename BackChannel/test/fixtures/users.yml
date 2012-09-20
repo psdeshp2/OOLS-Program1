@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  username: MyString
-  password: MyString
-  admin_flag: 
+  username: deep
+  crypted_password: dee@gmail.com
+  admin_flag: 0
 
 two:
-  username: MyString
-  password: MyString
-  admin_flag: 
+  username: admin
+  crypted_password: adminpass
+  admin_flag: 1
