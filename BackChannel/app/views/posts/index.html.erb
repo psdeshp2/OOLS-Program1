@@ -1,24 +1,35 @@
 
 
-<!-- Flash Notice -->
-<div class="notice" style="color:#8b0000; text-align: center;"><%= notice %></div>
-
+<div class="notice" style="color:#8b0000;margin-left:20px;"><%= notice %></div>
 <div style="width:100%;">
-    <div style="float:left; width:5%;"></div>
+<div style="float:left; width:5%;">
+      <!-- Set Div As your requirement -->
+</div>
 <div style="float:right; width:95%; border-left: 2px #008b8b; padding: 10px;">
       <h3>Posts from everyone: </h3><br>
 
   <% @posts.each do |post| %>
       <table>
         <td>
-          <div style="font-size: 18px;"><%= post.content %>&nbsp;&nbsp;<i>by <%= post.user.username %></div>
+          <div style="font-size: 18px;"><%= post.content %>&nbsp;&nbsp; <i>by <%= post.user.username %></i></div>
         </td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <tr>
+          <td><%= link_to 'Show Post', post %></td>
+          <% unless current_user.id != post.user_id %>
+              <td><%= link_to 'Edit Post', edit_post_path(post) %></td>
+          <% end %>
+          <td>&nbsp;&nbsp;</td>
+          <% if current_user.id == post.user_id || admin_user?%>
+              <td><%= link_to 'Delete Post', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        </tr>
         <td>&nbsp;&nbsp;&nbsp;</td>
         <% if admin_user? %>
             <% post.comments.each do |comment| %>
                 <tr>
                   <td>
-                    <div style="margin-bottom: 15px;"><%= comment.content %> <div style="font-size: 8px;"><i>by <%= comment.user.username %></i></div> </div>
+                    <div style="margin-bottom: 15px;"><%= comment.content %> <div style="font-size: 12px;"><i>by <%= comment.user.username %></i></div> </div>
                   </td>
                   &nbsp;&nbsp;
                   <td>
@@ -39,16 +50,6 @@
               </td>
         <% end %>
         <tr>&nbsp;</tr> <tr>&nbsp;</tr><tr>&nbsp;</tr>
-        <tr>
-              <td><%= link_to 'Show Post', post %></td>
-              <% unless current_user.id != post.user_id %>
-                <td><%= link_to 'Edit Post', edit_post_path(post) %></td>
-              <% end %>
-              <td>&nbsp;&nbsp;</td>
-          <% if current_user.id == post.user_id || admin_user?%>
-              <td><%= link_to 'Delete Post', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        </tr>
       </table>
       <br>
     <% end %>

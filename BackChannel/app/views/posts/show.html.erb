@@ -88,23 +88,37 @@
                   <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                   <td>
                     &nbsp;&nbsp;&nbsp;
-                    <% unless current_user.id == comment.user_id || has_current_user_voted_comment %>
-                        <div style="margin-bottom: 15px;"><%= link_to 'Vote', :controller => "votes", :action => "new", :comment_id => comment.id %></div>
-                    <% end %>
+
+                        <!--<div style = "margin-left: 30px; margin-down: 30px;">-->
+                          <table>
+                            <tr>
+                              <td width="33%">
+                                <% unless current_user.id == comment.user_id || has_current_user_voted_comment %>
+                                <%= link_to 'Vote', :controller => "votes", :action => "new", :comment_id => comment.id %>
+                                <% end %>
+                              </td>
+                              <td>&nbsp;&nbsp;</td>
+                              <td width="33%">
+                                <% if current_user.id == comment.user_id %>
+                                    <%= link_to 'Edit Comment', edit_comment_path(:id => comment.id,:post_id =>@post.id)  %>
+                                <% end %>
+                              </td>
+                              <td>&nbsp;&nbsp;</td>
+                              <td width="33%">
+                                <% if current_user.id == comment.user_id || admin_user?%>
+                                    <%= link_to 'Delete Comment', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+                                <% end %>
+                              </td>
+                            </tr>
+                          </table>
+                        <!--</div>-->
                   </td>
                 </tr>
                 <tr>
-                      <% unless current_user.id != comment.user_id %>
-                      <div style = "margin-left: 30px;">
-                        <table>
-                          <tr>
-                            <td><%= link_to 'Edit Comment', edit_comment_path(:id => comment.id,:post_id =>@post.id)  %></td>
-                            <td>&nbsp;&nbsp;</td>
-                            <td><%= link_to 'Delete Comment', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                          </tr>
-                        </table>
-                      </div>
-                      <% end %>
+
+
+
+
                 </tr>
                 <tr>&nbsp;&nbsp;</tr> <tr>&nbsp;&nbsp;</tr> <tr>&nbsp;&nbsp;</tr> <tr>&nbsp;&nbsp;</tr>
           <% end %>
@@ -115,11 +129,9 @@
       <tr>
       <%= form_for([@post, @post.comments.build]) do |f| %>
               <td>
-                <div style="margin-left: 25px;" class="field">
+                <div class="field">
                   <%= f.text_field :content %>
                 </div>
-              </td>
-              <td>
                 <div class="actions">
                   <%= f.submit %>
                 </div>
