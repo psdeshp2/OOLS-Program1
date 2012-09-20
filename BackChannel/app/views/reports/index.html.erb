@@ -1,2 +1,30 @@
 <br><br><br>
-<h1>Reports:</h1>
+<h1>User Activity Report</h1>
+
+<table border="1">
+    <tr>
+      <td>
+        User Name
+      </td>
+      <td>
+        Number of Posts
+      </td>
+      <td>
+        Number of Comments
+      </td>
+      <td>
+        Number of Votes
+      </td>
+    </tr>
+    <% @all_users_for_report.each do |user_for_report| %>
+    <tr>
+        <td><%= user_for_report.username %></td>
+        <td><%= number_of_posts_per_user(user_for_report.id) %></td>
+        <td><%= number_of_comments_per_user(user_for_report.id) %></td>
+        <td><%= number_of_votes_per_user(user_for_report.id) %></td>
+    </tr>
+    <% end %>
+</table>
+
+<%= link_to 'Back to Admin Tools', admin_path %>
+

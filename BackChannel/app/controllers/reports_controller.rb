@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 
-def index
-  @users = User.all
-end
+  def index
+    @all_users_for_report = User.all
+  end
 
 end
